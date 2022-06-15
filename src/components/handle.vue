@@ -1,20 +1,17 @@
 <template>
-
-     <div
-       :style="{
-         color: botHandles.includes(streamer_handle) ? '#ff4f4d' : gc(),
-         borderColor: botHandles.includes(streamer_handle) ? '#f1f1f1' : gc(),
-       }"
-       class="__item"
-     >
-     <!-- <img v-if="type === 'twitch'" class="twitch-logo" src="/twitch.png" alt="streamer" />
-      -->
-       {{ streamer_handle }}
-     </div>
+  <div
+    class="__item"
+    :style="{
+      color: botHandles.includes(streamer_handle) ? '#ff4f4d' : gc(),
+      borderColor: botHandles.includes(streamer_handle) ? '#f1f1f1' : gc(),
+    }"
+  >
+    {{ streamer_handle }}
+  </div>
 </template>
 
 <script>
-import generateColor from '@/helpers/generateColor';
+import generateColor from "@/helpers/generateColor";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -34,10 +31,12 @@ export default {
     };
   },
   methods: {
-      gc () {
-          return generateColor(30, 60,80,this.streamer_handle)
-      }
-  }
+    gc() {
+      // return generateColor(30, 60, 80, this.streamer_handle);
+    return generateColor(null, 90, 80, this.streamer_handle);
+      
+    },
+  },
 };
 </script>
 
@@ -60,7 +59,7 @@ export default {
   cursor: pointer;
 }
 img {
-    max-width: fit-content;
-    overflow: hidden;
+  max-width: fit-content;
+  overflow: hidden;
 }
 </style>

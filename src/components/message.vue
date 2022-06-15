@@ -1,8 +1,9 @@
 <template>
     <div class="msg-container">
         <p class="msg">{{ message.message }}</p>
+        <p class="handle" v-if="message.handle"> {{message.handle}} </p>
         <p>{{ new Date(message.time).getHours() }}:{{ new Date(message.time).getMinutes() }}:{{ new Date(message.time).getSeconds() }}</p>
-    </div>
+    </div>  
 </template>
 
 <script>
@@ -43,7 +44,7 @@
         width: 100%;
     }
 
-    .msg {
+    .msg, .handle {
         color: #f1f1f1;
     }
 
