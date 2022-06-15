@@ -1,7 +1,11 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
   <h1>Twitch Chat Leaderboards</h1>
-  <Streamers/>
+  <Streamers />
+  <footer>
+    Powered by MongoNetes Inc
+    <img src="/mongonetes.png" id="logo"/>
+  </footer>
 </template>
 
 <script>
@@ -19,20 +23,30 @@ export default {
 * {
   background: #0e0e10;
 }
+#logo {
+  width: 3%;
+  height: auto;
+}
 body {
   margin-left: 150px;
   margin-right: 150px;
 }
-h1, h2, h3 {
+
+h1,
+h2,
+h3 {
   color: #f1f1f1;
 }
+
 .container {
-   display: flex;
+  display: flex;
   flex-wrap: wrap;
 }
+
 .list {
-  flex-direction:column;
+  flex-direction: column;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -40,7 +54,18 @@ h1, h2, h3 {
   color: #2c3e50;
   margin-top: 60px;
 }
-    /* --color-twitch-purple-5: #330c6e;
+
+.kpis {
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  justify-content: space-evenly;
+}
+
+footer {
+  bottom: 0;
+}
+/* --color-twitch-purple-5: #330c6e;
     --color-twitch-purple-6: #451093;
     --color-twitch-purple-7: #5c16c5;
     --color-twitch-purple-8: #772ce8;

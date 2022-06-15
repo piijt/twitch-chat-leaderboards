@@ -12,6 +12,7 @@
 import axios from 'axios';
 import handle from './handle';
 import chatAggregateVue from './chatAggregate.vue';
+import generateColor from '@/helpers/generateColor';
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -31,10 +32,13 @@ export default {
   },
   created() { }, // before mount 
   mounted() {
-    this.get_streamers_from_active_session(25);
+    this.get_streamers_from_active_session(Infinity);
   }, 
 
   methods: {
+    gc (string) {
+      return generateColor(string)
+    },  
     async get_streamers(cursor) {
       const streamers = (await axios.get('/streamers.json')).data
       this.streamers = streamers.splice(0, cursor)

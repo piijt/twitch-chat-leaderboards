@@ -21,6 +21,11 @@ export default {
     mounted() {
         this.computeValue();
     }, // after render
+    watch: {
+        value () {
+            this.computeValue();
+        }
+    },
     methods: {
         computeValue() {
             this.metric = this.unit ? `${this.value} ${this.unit}` : this.value
@@ -33,9 +38,15 @@ export default {
 h4,
 p {
     display: flex;
-    color: #42b883;
     justify-content: center;
     font-weight: 900;
+}
+p {
+    color: #42b883;
+}
+
+h4 {
+    color: #f1f1f1;
 }
 
 .kpi {
