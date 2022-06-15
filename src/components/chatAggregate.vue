@@ -1,7 +1,7 @@
 <template>
   <div class="section-header">
     <Live v-if="liveStatus" />
-    <h2>{{ channel }} {{liveStatus}} </h2>
+    <h2>{{ channel }}</h2>
   </div>
 
   <div class="kpis">
@@ -10,7 +10,7 @@
     <KPI name="Messages" :value="kpis.totalMessages" />
     <KPI v-if="kpis?.chatters" name="Chatters" :value="kpis.chatters" />
     <KPI name="Chat Sentiment" value="Poggers" />
-    <KPI name="Tracked Duration" :value="Math.ceil(kpis.trackedDuration / 60_000)" unit="minutes" />
+    <KPI name="Tracked Duration" :value="Math.ceil(kpis.trackedDuration / 60000)" unit="minutes" />
     <KPI
       name="Chat Frequency"
       :value="kpis.chatFrequency"
@@ -79,6 +79,7 @@ export default {
   },
   watch: {
     channel() {
+      this.lc();
       this.getInfo();
       this.chatFrequency();
     },
@@ -88,8 +89,6 @@ export default {
   },
   methods: {
     async getInfo() {
-      const l = await this.lc();
-      console.log({ l });
       const entry = (await axios.get("/session_sample.json")).data;
       this.raw = entry;
       this.StreamerChatFromSession = this.raw[this.channel];
@@ -121,13 +120,9 @@ export default {
     },
     async lc() {
       try {
-        const l = await liveCheck(this.channel);
-        if (l) {
-          this.liveStatus = true;
-        }
+        this.liveStatus = await liveCheck(this.channel);
       } catch (error) {
         console.log(error);
-        this.liveStatus = false;
       }
     },
     async chatFrequency() {

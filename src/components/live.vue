@@ -19,8 +19,9 @@
 
 <style scoped>
     .icon {
-        width: 100px !important;
-        height: 200px !important;
+        width: 50px !important;
+        height: auto !important;
+        
         /* border-radius: 1000px;
          */
     }
