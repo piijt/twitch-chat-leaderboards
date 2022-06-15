@@ -1,8 +1,8 @@
 <template>
-  <h2>Streamers</h2>
+  <h2><img class="twitch-logo" src="/twitch.png">Streamers</h2>
   <div class="container">    
-    <div class="list" v-for="streamer of activeStreamers" v-bind:key="streamer">
-      <handle @click="displayChannel(streamer)" :streamer_handle="streamer" />
+    <div  v-for="streamer of activeStreamers" v-bind:key="streamer">
+      <handle @click="displayChannel(streamer)" type="twitch" :streamer_handle="streamer" />
     </div>
   </div>
   <chatAggregateVue v-if="activeHandle" :channel="activeHandle"/>
@@ -58,11 +58,12 @@ export default {
 </script>
 
 <style scoped>
-.container {
-   display: flex;
-  flex-wrap: wrap;
+h2 {
+  display: flex;
+  justify-content: center;
 }
 .list {
   flex-direction:column;
 }
+
 </style>

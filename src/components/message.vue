@@ -1,7 +1,7 @@
 <template>
     <div class="msg-container">
         <p class="msg">{{ message.message }}</p>
-        <p class="date"> {{ message.time }} </p>
+        <p>{{ new Date(message.time).getHours() }}:{{ new Date(message.time).getMinutes() }}:{{ new Date(message.time).getSeconds() }}</p>
     </div>
 </template>
 
@@ -38,8 +38,9 @@
 <style scoped>
     .msg-container {
         display: flex;
-        flex-direction: column;
-        gap: 5px;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
     }
 
     .msg {
@@ -47,7 +48,6 @@
     }
 
     .date {
-        font-size: x-small;
         color: #f1f1f1;
     }
 

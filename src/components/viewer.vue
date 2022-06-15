@@ -4,8 +4,13 @@
         <div class="kpis">
             <KPI name="Messages Sent" :value="messagesSent"/>
             <KPI name="Retention" :value="Math.ceil(retention)" unit="minutes"/>
+            <KPI v-if="messages.length && messages[0]?.time" name="first message in stream" :value="new Date(messages[0].time).toLocaleDateString()" />
         </div>
-        <div v-for="message of messages" v-bind:key="message">
+        <div class="table-info">
+            <h4>message</h4> 
+            <h4>time</h4>
+        </div>
+        <div class="messages" v-for="message of messages" v-bind:key="message">
             <Message :message="message"/>
         </div>
     </div>
@@ -46,4 +51,9 @@
 </script>
 
 <style scoped>
+.table-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 </style>

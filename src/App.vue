@@ -3,6 +3,10 @@
   <h1>Twitch Chat Leaderboards</h1>
   <Streamers />
   <footer>
+    <div class="some">
+      <!-- <a href="#"><img src="/twitter.png" alt=""></a>
+      <a href=""><img src="/github.png" alt=""></a> -->
+    </div>
     Powered by MongoNetes Inc
     <img src="/mongonetes.png" id="logo"/>
   </footer>
@@ -21,7 +25,7 @@ export default {
 
 <style>
 * {
-  background: #0e0e10;
+  background:#0e0e10;
 }
 #logo {
   width: 3%;
@@ -37,7 +41,14 @@ h2,
 h3 {
   color: #f1f1f1;
 }
-
+.some > a {
+  list-style: none;
+  color: rgb(164, 229, 218);
+  padding-right: 10px;
+}
+.some > a > img {
+  width: 2%;
+}
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -63,7 +74,17 @@ h3 {
 }
 
 footer {
-  bottom: 0;
+    display: flex;
+    bottom: 0;
+    color: #f1f1f1;
+    opacity: .8;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    justify-content: flex-end;
+    margin-top: 50px;
+}
+.twitch-logo {
+  width: 2%;
 }
 /* --color-twitch-purple-5: #330c6e;
     --color-twitch-purple-6: #451093;

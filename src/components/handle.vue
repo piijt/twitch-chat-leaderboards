@@ -1,13 +1,16 @@
 <template>
-  <div
-    :style="{
-      color: botHandles.includes(streamer_handle) ? '#ff4f4d' : gc(),
-      borderColor: botHandles.includes(streamer_handle) ? '#f1f1f1' : gc(),
-    }"
-    class="__item"
-  >
-    {{ streamer_handle }}
-  </div>
+
+     <div
+       :style="{
+         color: botHandles.includes(streamer_handle) ? '#ff4f4d' : gc(),
+         borderColor: botHandles.includes(streamer_handle) ? '#f1f1f1' : gc(),
+       }"
+       class="__item"
+     >
+     <!-- <img v-if="type === 'twitch'" class="twitch-logo" src="/twitch.png" alt="streamer" />
+      -->
+       {{ streamer_handle }}
+     </div>
 </template>
 
 <script>
@@ -32,7 +35,7 @@ export default {
   },
   methods: {
       gc () {
-          return generateColor(null, 30,70,this.streamer_handle)
+          return generateColor(30, 60,80,this.streamer_handle)
       }
   }
 };
@@ -45,7 +48,7 @@ export default {
   width: auto;
   margin: 10px 10px 10px 10px;
   border-radius: 10px;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   color: #bf94ff;
   cursor: pointer;
@@ -55,5 +58,9 @@ export default {
 .__item:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+img {
+    max-width: fit-content;
+    overflow: hidden;
 }
 </style>
