@@ -21,7 +21,7 @@
     .icon {
         width: 50px !important;
         height: auto !important;
-        
+        transition: transform 2s;
         /* border-radius: 1000px;
          */
     }

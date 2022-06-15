@@ -79,9 +79,9 @@ export default {
   },
   watch: {
     channel() {
-      this.lc();
       this.getInfo();
       this.chatFrequency();
+      this.lc();
     },
     viewers() {
       this.getViewers();
@@ -179,5 +179,6 @@ export default {
 .section-header {
   display: flex;
   align-items: center;
+  transition: ease-in 2s;
 }
 </style>
