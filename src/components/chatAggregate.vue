@@ -1,5 +1,8 @@
 <template>
-  <h2>{{ channel }}</h2>
+  <div class="section-header">
+    <Live v-if="liveStatus" />
+    <h2>{{ channel }} {{liveStatus}} </h2>
+  </div>
 
   <div class="kpis">
     <!-- <KPI name="Aggregate Retention" :value="kpis.aggChatRetention" unit="minutes"/> -->
@@ -13,7 +16,7 @@
       :value="kpis.chatFrequency"
       :unit="`distributed / (${frequencyDistributionMins})minutes`"
     />
-  </div>  
+  </div>
   <div v-if="chatCommands.length">
     <h3>Commands from chat</h3>
     <div class="list" v-for="command of chatCommands" v-bind:key="command">
@@ -32,6 +35,8 @@ import axios from "axios";
 import KPI from "./kpi";
 import Viewers from "./viewers";
 import Handle from "./handle";
+import Live from "./live";
+import liveCheck from "../helpers/liveCheck.js";
 
 export default {
   name: "StreamerChatAggregate",
@@ -42,12 +47,14 @@ export default {
     KPI,
     Viewers,
     Handle,
+    Live,
   },
   mounted() {
     this.getInfo();
   },
   data() {
     return {
+      liveStatus: false,
       raw: null,
       frequencyDistributionMins: 5,
       StreamerChatFromSession: null,
@@ -81,6 +88,8 @@ export default {
   },
   methods: {
     async getInfo() {
+      const l = await this.lc();
+      console.log({ l });
       const entry = (await axios.get("/session_sample.json")).data;
       this.raw = entry;
       this.StreamerChatFromSession = this.raw[this.channel];
@@ -93,12 +102,11 @@ export default {
       this.chatCommands = [];
       for (const key of Object.keys(this.StreamerChatFromSession)) {
         const val = this.StreamerChatFromSession[key];
-        this.kpis.aggChatRetention += val.retention;
+        this.kpis.aggChatRetention += parseInt(val.retention) ?? 0;
         this.kpis.totalMessages += val.table.length;
         val.table.filter((item) => {
-          if (item.message.charAt(0) === "!") {
+          if (item?.message.length && item?.message?.charAt(0) === "!") {
             item.handle = key;
-            console.log(item);
             if (this.chatCommands.indexOf(item.message) === -1) {
               this.chatCommands.push(item.message);
             }
@@ -111,7 +119,17 @@ export default {
     async getViewers() {
       this.kpis.chatters = Object.keys(this.StreamerChatFromSession).length;
     },
-
+    async lc() {
+      try {
+        const l = await liveCheck(this.channel);
+        if (l) {
+          this.liveStatus = true;
+        }
+      } catch (error) {
+        console.log(error);
+        this.liveStatus = false;
+      }
+    },
     async chatFrequency() {
       const group = [];
       // const bucket = [];
@@ -142,7 +160,6 @@ export default {
       let max = 0;
       let min = 999999;
       for (const entry of bucket) {
-        console.log("length", entry.length);
         if (entry.length > max) {
           max = entry.length;
         }
@@ -153,7 +170,7 @@ export default {
 
         sumFreqAvg += entry.length / this.frequencyDistributionMins;
       }
-      console.log({ sumFreqAvg, max, min, distribution: (max - min) / bucket.length, channel: this.channel });
+      //   console.log({ sumFreqAvg, max, min, distribution: (max - min) / bucket.length, channel: this.channel });
 
       this.kpis.trackedDuration = new Date(sort[sort.length - 1].time).getTime() - new Date(sort[0].time).getTime();
       this.charts.chatFrequency = bucket;
@@ -164,8 +181,8 @@ export default {
 </script>
 
 <style scoped>
-button {
-  background-color: aqua;
-  color: #333;
+.section-header {
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -7,7 +7,7 @@
       <!-- <a href="#"><img src="/twitter.png" alt=""></a>
       <a href=""><img src="/github.png" alt=""></a> -->
     </div>
-    Powered by MongoNetes Inc
+    Powered by MongoNetes 
     <img src="/mongonetes.png" id="logo"/>
   </footer>
 </template>

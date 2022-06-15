@@ -1,6 +1,5 @@
 export default (hue = null, saturation = null, light = null, text = null) => {
     if (text) {
-        console.log(text)
       let sum = 0;
       for (let i = 0; i < text.length; ++i) {
         sum += text[i].charCodeAt(0);

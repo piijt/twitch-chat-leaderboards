@@ -6,6 +6,7 @@
     </div>
   </div>
   <chatAggregateVue v-if="activeHandle" :channel="activeHandle"/>
+  {{liveStreamers}}
 </template>
 
 <script>
@@ -28,6 +29,7 @@ export default {
       cursor: 10,
       showAggregate: false,
       activeHandle: null,
+      liveStreamers: ["me"]
     }
   },
   created() { }, // before mount 
@@ -43,13 +45,13 @@ export default {
       const streamers = (await axios.get('/streamers.json')).data
       this.streamers = streamers.splice(0, cursor)
     },
+
     async get_streamers_from_active_session(cursor) {
       const streamers = (await axios.get('/session_sample.json')).data
       this.activeStreamers = Object.keys(streamers).splice(0,cursor);
       this.activeHandle = this.activeStreamers[0];
     },
     displayChannel(handle) {
-      console.log(handle)
       this.activeHandle = handle;
     },
   },

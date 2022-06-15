@@ -29,7 +29,6 @@
             formatDate (string) {
                 const d = new Date(string);
                 this.computedDate = `${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`;
-                console.log({c: this.computedDate})
             }
         },
         computed: {}

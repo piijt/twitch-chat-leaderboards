@@ -48,7 +48,6 @@ export default {
   computed: {},
   methods: {
     async getViewerInfo(viewer) {
-      console.log(viewer);
       this.activeViewer = viewer;
       const entry = (await axios.get("/session_sample.json")).data;
       const viewerInfo = entry[this.streamer][viewer];
