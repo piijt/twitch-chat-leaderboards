@@ -4,7 +4,7 @@
     <h2>{{ channel }}</h2>
     <WatchStream :handle="cleanHandle" v-if="liveStatus" />
   </div>
-
+  <Stream v-if="liveStatus" :channel="cleanHandle"/>
   <div class="kpis">
     <!-- <KPI name="Aggregate Retention" :value="kpis.aggChatRetention" unit="minutes"/> -->
     <KPI name="Average Retention" :value="Math.ceil(kpis.avgChatRetention)" unit="minutes" />
@@ -39,6 +39,7 @@ import Handle from "./handle";
 import Live from "./animations/live.vue";
 import liveCheck from "../helpers/liveCheck.js";
 import WatchStream from "./watchStream.vue";
+import Stream from './embedStream.vue'
 
 export default {
   name: "StreamerChatAggregate",
@@ -51,6 +52,7 @@ export default {
     Handle,
     Live,
     WatchStream,
+    Stream
   },
   mounted() {
     this.getInfo();
