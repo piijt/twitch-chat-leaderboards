@@ -1,7 +1,8 @@
 <template>
   <div class="section-header">
-    <Live v-if="liveStatus" />
+          <Live v-if="liveStatus" />
     <h2>{{ channel }}</h2>
+    <WatchStream :handle="cleanHandle" v-if="liveStatus" />
   </div>
 
   <div class="kpis">
@@ -35,8 +36,9 @@ import axios from "axios";
 import KPI from "./kpi";
 import Viewers from "./viewers";
 import Handle from "./handle";
-import Live from "./live";
+import Live from "./animations/live.vue";
 import liveCheck from "../helpers/liveCheck.js";
+import WatchStream from "./watchStream.vue";
 
 export default {
   name: "StreamerChatAggregate",
@@ -48,6 +50,7 @@ export default {
     Viewers,
     Handle,
     Live,
+    WatchStream,
   },
   mounted() {
     this.getInfo();
@@ -91,6 +94,7 @@ export default {
     async getInfo() {
       const entry = (await axios.get("/session_sample.json")).data;
       this.raw = entry;
+      this.cleanHandle = this.channel.substring(1)
       this.StreamerChatFromSession = this.raw[this.channel];
       this.viewers = Object.keys(this.StreamerChatFromSession);
       this.kpis.aggChatRetention = 0;
@@ -127,7 +131,6 @@ export default {
     },
     async chatFrequency() {
       const group = [];
-      // const bucket = [];
       for (const key of Object.keys(this.raw[this.channel])) {
         for (const entry of this.raw[this.channel][key].table) {
           group.push(entry);

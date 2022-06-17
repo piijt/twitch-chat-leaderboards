@@ -1,6 +1,4 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <h1>Twitch Chat Leaderboards</h1>
   <Streamers />
   <footer>
     <div class="some">
@@ -32,7 +30,7 @@ export default {
   height: auto;
 }
 body {
-  margin-left: 150px;
+  margin-left: 275px;
   margin-right: 150px;
 }
 
@@ -85,6 +83,17 @@ footer {
 }
 .twitch-logo {
   width: 2%;
+}
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
 /* --color-twitch-purple-5: #330c6e;
     --color-twitch-purple-6: #451093;

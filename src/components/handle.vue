@@ -4,6 +4,7 @@
     :style="{
       color: botHandles.includes(streamer_handle) ? '#ff4f4d' : gc(),
       borderColor: botHandles.includes(streamer_handle) ? '#f1f1f1' : gc(),
+      boxShadow: botHandles.includes(streamer_handle) ? '0 0 10px #f1f1f1' : '0 0 10px' + gc()
     }"
   >
     {{ streamer_handle }}
@@ -57,6 +58,7 @@ export default {
 .__item:hover {
   opacity: 0.8;
   cursor: pointer;
+  box-shadow:0 0 10px #9ecaed;
 }
 img {
   max-width: fit-content;
