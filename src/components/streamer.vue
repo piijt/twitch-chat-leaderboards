@@ -185,5 +185,6 @@ export default {
   display: flex;
   align-items: center;
   transition: ease-in 2s;
+  z-index: 1;
 }
 </style>

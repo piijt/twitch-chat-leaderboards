@@ -84,6 +84,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  z-index: -1;
+}
 h2 {
   display: flex;
   justify-content: center;
