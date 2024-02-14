@@ -1,4 +1,5 @@
 # twitch-chat-leaderboards
+## An application that track twitch streams & their chat with some metrics about avaerage attention and user engagement through the chat.
 
 ## Project setup
 ```
